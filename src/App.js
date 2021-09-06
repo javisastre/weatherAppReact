@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+require("dotenv").config();
 
 const api = {
-  key: "0c85f5856ac69992b41e85a1abd59f05",
+  key: process.env.REACT_APP_API_KEY,
   base: "https://api.openweathermap.org/data/2.5/",
 };
 
@@ -97,8 +98,13 @@ const App = () => {
               <div className='other'>
                 Percepció: {Math.round(info.main.feels_like)}ºC
               </div>
-              <div className='other'>Humitat: 89%</div>
-              <div className='other'>Precipitació: 2mm</div>
+              <div className='other'>
+                Màxima: {Math.round(info.main.temp_max)}ºC
+              </div>
+              <div className='other'>
+                Mínima: {Math.round(info.main.temp_min)}ºC
+              </div>
+              <div className='other'>Humitat: {info.main.humidity}%</div>
             </div>
             <div className='dreta'>
               <div className='symbol'>
@@ -107,10 +113,12 @@ const App = () => {
                   alt='weather symbol'
                 />
               </div>
-              <div className='sky-status'>
-                {catDictionary[info.weather[0].description]}
+              <div className="status-temp">
+                <div className='sky-status'>
+                  {catDictionary[info.weather[0].description]}
+                </div>
+                <div className='temp'>{Math.round(info.main.temp)}ºC</div>
               </div>
-              <div className='temp'>{Math.round(info.main.temp)}ºC</div>
             </div>
           </div>
         ) : null}

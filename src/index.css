@@ -76,25 +76,31 @@ main {
 }
 
 .weather-box {
+  height: 280px;
   margin-top: 20px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 20px;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .weather-box .dreta {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .weather-box .dreta .symbol {
   margin-top: -30px;
 }
 
+.weather-box .dreta .status-temp {
+  margin-top: -30px;
+}
+
 .weather-box .dreta .sky-status {
-  margin: -30px 0 0 0;
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
@@ -104,6 +110,13 @@ main {
   font-size: 4rem;
   font-weight: 600;
   text-align: center;
+}
+
+.weather-box .esquerra {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .weather-box .esquerra .other {
