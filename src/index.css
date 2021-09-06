@@ -10,22 +10,34 @@ body {
 }
 
 .App {
-  background-image: url("./images/sunny.jpg");
+  background-color: rgba(0, 0, 0, 0.9);
   background-position: top;
   background-size: cover;
   transition: 0.5 ease-out;
 }
 
-.App.sunny {
+.clear {
   background-image: url("./images/sunny.jpg");
 }
 
-.App.rainy {
+.clouds {
+  background-image: url("./images/cloudy.jpg");
+}
+
+.rain {
   background-image: url("./images/rainy.jpg");
 }
 
-.App.snowy {
+.thunderstorm {
+  background-image: url("./images/thunderstorm.jpeg");
+}
+
+.snow {
   background-image: url("./images/snowy.jpg");
+}
+
+.fog {
+  background-image: url("./images/foggy.jpeg");
 }
 
 main {

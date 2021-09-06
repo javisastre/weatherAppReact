@@ -38,10 +38,11 @@ const dateBuilder = (d) => {
   return `${day}, ${date} de ${month} de ${year}`;
 };
 
-const catDictionary = {
+const catalanConverter = {
   "clear sky": "Cel serè",
   "few clouds": "Alguns núvols",
   "scattered clouds": "Ennuvolat",
+  "overcast clouds": "Ennuvolat",
   "broken clouds": "Molt ennuvolat",
   "shower rain": "Pluja",
   "rain": "Xàfec",
@@ -53,9 +54,27 @@ const catDictionary = {
 const App = () => {
   const [query, setQuery] = useState("");
   const [info, setInfo] = useState({});
+  const [background, setBackground] = useState("App");
   const defaultCity = "Barcelona";
 
   useEffect(() => requestInfo(defaultCity), []);
+  useEffect(() => {
+    if (info.weather) {
+      if (info.weather[0].id > 200 && info.weather[0].id < 300) {
+        setBackground("App thunderstorm");
+      } else if (info.weather[0].id > 300 && info.weather[0].id < 600) {
+        setBackground("App rain");
+      } else if (info.weather[0].id > 600 && info.weather[0].id < 700) {
+        setBackground("App snow");
+      } else if (info.weather[0].id > 700 && info.weather[0].id < 800) {
+        setBackground("App fog");
+      } else if (info.weather[0].id === 800) {
+        setBackground("App clear");
+      } else if (info.weather[0].id > 800) {
+        setBackground("App clouds");
+      }
+    }
+  }, [info]);
 
   const requestInfo = (city) => {
     fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
@@ -72,7 +91,7 @@ const App = () => {
   };
 
   return (
-    <div className='App'>
+    <div className={background}>
       <main>
         <div className='search-box'>
           <input
@@ -113,9 +132,9 @@ const App = () => {
                   alt='weather symbol'
                 />
               </div>
-              <div className="status-temp">
+              <div className='status-temp'>
                 <div className='sky-status'>
-                  {catDictionary[info.weather[0].description]}
+                  {catalanConverter[info.weather[0].description]}
                 </div>
                 <div className='temp'>{Math.round(info.main.temp)}ºC</div>
               </div>
