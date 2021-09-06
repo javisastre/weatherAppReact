@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const API = {
+const api = {
   key: "0c85f5856ac69992b41e85a1abd59f05",
-  base: "api.openweathermap.org/data/2.5/",
+  base: "https://api.openweathermap.org/data/2.5/",
 };
 
 const App = () => {
@@ -11,8 +11,8 @@ const App = () => {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      fetch(`${API.base}weather?q=${query}&units=metric&APPID=${API.key}`)
-        .then((res) => JSON.stringify(res))
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then((res) => res.json())
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
     }
